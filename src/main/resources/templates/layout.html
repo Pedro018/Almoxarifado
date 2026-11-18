@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="cabecalho(titulo)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo} + ' · Almoxarifado'">Almoxarifado</title>
+    <link rel="stylesheet" th:href="@{/css/estoque.css}">
+</head>
+<body>
+<header class="topo" th:fragment="topo(pagina)">
+    <div class="marca"><b>Almoxarifado</b><span>controle de estoque</span></div>
+    <nav>
+        <a th:href="@{/cadastro}" th:aria-current="${pagina == 'cadastro'} ? 'page'">Cadastro</a>
+        <a th:href="@{/produtos}" th:aria-current="${pagina == 'produtos'} ? 'page'">Produtos</a>
+    </nav>
+</header>
+</body>
+</html>

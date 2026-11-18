@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Cadastro')}"></head>
+<body>
+<div class="pagina">
+    <header th:replace="~{layout :: topo(${pagina})}"></header>
+
+    <main>
+        <h1>Cadastrar produto</h1>
+        <p class="lede">Preencha os dados. O valor total é calculado automaticamente.</p>
+
+        <form class="cartao" th:action="@{/cadastro}" th:object="${form}" method="post" autocomplete="off">
+            <div class="alerta erro" th:if="${erro}" th:text="${erro}" role="alert"></div>
+
+            <div class="campo">
+                <label for="nome">Nome</label>
+                <input id="nome" type="text" th:field="*{nome}" maxlength="80" placeholder="Ex.: Parafuso sextavado M8" required>
+            </div>
+
+            <div class="linha2">
+                <div class="campo">
+                    <label for="quantidade">Quantidade</label>
+                    <input id="quantidade" type="text" inputmode="numeric" th:field="*{quantidade}" placeholder="0" required>
+                </div>
+                <div class="campo">
+                    <label for="valorUnitario">Valor unitário (R$)</label>
+                    <input id="valorUnitario" type="text" inputmode="decimal" th:field="*{valorUnitario}" placeholder="0,00" required>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="valorTotal">Valor total</label>
+                <input id="valorTotal" type="text" value="R$ 0,00" readonly tabindex="-1">
+            </div>
+
+            <div class="acoes">
+                <button type="submit" class="btn primario">Cadastrar produto</button>
+                <a class="btn" th:href="@{/produtos}">Ver produtos</a>
+            </div>
+        </form>
+    </main>
+</div>
+<script th:src="@{/js/cadastro.js}"></script>
+</body>
+</html>

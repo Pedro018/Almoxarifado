@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: cabecalho('Produtos')}"></head>
+<body>
+<div class="pagina">
+    <header th:replace="~{layout :: topo(${pagina})}"></header>
+
+    <main>
+        <h1>Produtos em estoque</h1>
+        <p class="lede">Todos os produtos cadastrados, com valor total por item.</p>
+
+        <div class="alerta ok" th:if="${sucesso}" th:text="${sucesso}" role="status"></div>
+
+        <div class="kpis">
+            <div><small>Produtos</small><div class="v" th:text="${#lists.size(produtos)}">0</div></div>
+            <div><small>Unidades</small><div class="v" th:text="${#numbers.formatInteger(totalUnidades,1,'POINT')}">0</div></div>
+            <div><small>Valor em estoque</small>
+                <div class="v destaque" th:text="'R$ ' + ${#numbers.formatDecimal(totalGeral,1,'POINT',2,'COMMA')}">R$ 0,00</div></div>
+        </div>
+
+        <div class="tabela-caixa">
+            <table>
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th class="dir">Quantidade</th>
+                    <th class="dir">Valor unitário</th>
+                    <th class="dir">Valor total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="p : ${produtos}">
+                    <td><b th:text="${p.nome}">Produto</b></td>
+                    <td class="dir num" th:text="${#numbers.formatInteger(p.quantidade,1,'POINT')}">0</td>
+                    <td class="dir num" th:text="'R$ ' + ${#numbers.formatDecimal(p.valorUnitario,1,'POINT',2,'COMMA')}">R$ 0,00</td>
+                    <td class="dir num" th:text="'R$ ' + ${#numbers.formatDecimal(p.valorTotal,1,'POINT',2,'COMMA')}">R$ 0,00</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="vazio" th:if="${#lists.isEmpty(produtos)}">
+                <b>Nenhum produto cadastrado</b>
+                <a th:href="@{/cadastro}">Cadastrar o primeiro produto</a>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
