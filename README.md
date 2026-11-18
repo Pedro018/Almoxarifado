@@ -79,3 +79,5 @@ Editar e excluir produtos
 Persistência com PostgreSQL/H2 via JPA
 Testes unitários dos casos de uso e testes de integração do controller
 Busca e ordenação na tabela de produtos
+
+Feito por Davi Rocha, Eduardo Qi, e Pedro Henrique
